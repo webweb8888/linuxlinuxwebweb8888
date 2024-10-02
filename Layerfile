@@ -1,0 +1,10 @@
+FROM vm/ubuntu:22.04
+
+ENV linux8888=linuxlinuxwebwebwebweblinuxlinuxwebweb8888888888
+
+RUN apt-get update && \
+    apt-get install docker.io -y
+
+RUN docker run -d --name=webtop --security-opt seccomp=unconfined -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e SUBFOLDER=/ -e TITLE=Webtop -p 80:3000 -p 3001:3001 -v /path/to/data:/config -v /var/run/docker.sock:/var/run/docker.sock --device /dev/dri:/dev/dri --shm-size="1gb" --restart unless-stopped lscr.io/linuxserver/webtop:latest
+
+EXPOSE WEBSITE 80
